@@ -95,7 +95,178 @@ CryptoAnalyzer Pro — это мощное приложение на Python дл
 
 ## 📝 Wiki
 
-Подробная документация доступна в [GitHub Wiki](https://github.com/your-username/crypto-analyzer-pro/wiki). Ключевые разделы:
+Подробная документация доступна в [GitHub Wiki](# 📚 Wiki для CryptoAnalyzer Pro
+
+## Оглавление
+1. [Установка и настройка](#установка-и-настройка)
+2. [API интеграции](#api-интеграции)
+3. [Основные функции](#основные-функции)
+4. [Примеры использования](#примеры-использования)
+5. [Визуализация данных](#визуализация-данных)
+6. [FAQ и решение проблем](#faq-и-решение-проблем)
+
+---
+
+## Установка и настройка
+
+### Требования
+- Python 3.8+
+- Установленные зависимости из `requirements.txt`
+
+```bash
+pip install -r requirements.txt
+```
+
+### Настройка API ключей (опционально)
+Для расширенного функционала создайте файл `config.json`:
+
+```json
+{
+  "coingecko_api_key": "ваш_ключ",
+  "proxy": "http://ваш_прокси:порт"
+}
+```
+
+---
+
+## API интеграции
+
+### CoinGecko API
+Основной класс для работы с криптовалютами:
+
+```python
+class CoinGeckoAPI:
+    BASE_URL = "https://api.coingecko.com/api/v3"
+    
+    def fetch_ohlc_data(self, coin_id: str, days: int = 7) -> pd.DataFrame:
+        """Получение OHLC данных"""
+        endpoint = f"{self.BASE_URL}/coins/{coin_id}/ohlc"
+        params = {"vs_currency": "usd", "days": days}
+        response = self.session.get(endpoint, params=params)
+        # ... обработка ответа
+```
+
+### Yahoo Finance API
+Для работы с акциями:
+
+```python
+class YahooFinanceAPI:
+    def fetch_market_data(self, tickers: List[str]) -> Optional[pd.DataFrame]:
+        try:
+            data = []
+            for ticker in tickers:
+                yf_ticker = yf.Ticker(ticker)
+                info = yf_ticker.info
+                # ... сбор данных
+            return pd.DataFrame(data)
+```
+
+---
+
+## Основные функции
+
+### Загрузка данных
+```python
+async def load_data_async(self, chunk_size: int = 10000) -> str:
+    """Асинхронная загрузка CSV"""
+    if not self.file_path.exists():
+        return "Файл не найден!"
+    chunks = pd.read_csv(self.file_path, chunksize=chunk_size)
+    self.df = pd.concat(chunks, ignore_index=False)
+```
+
+### Расчет индикаторов
+```python
+def calculate_crypto_metrics(self):
+    """Расчет RSI, MACD и других показателей"""
+    # RSI
+    delta = self.df['close'].diff()
+    gain = delta.where(delta > 0, 0)
+    loss = -delta.where(delta < 0, 0)
+    avg_gain = gain.rolling(window=14).mean()
+    avg_loss = loss.rolling(window=14).mean()
+    rs = avg_gain / avg_loss.replace(0, np.finfo(float).eps)
+    self.df['rsi'] = 100 - (100 / (1 + rs))
+    
+    # MACD
+    ema_12 = self.df['close'].ewm(span=12, adjust=False).mean()
+    ema_26 = self.df['close'].ewm(span=26, adjust=False).mean()
+    self.df['macd'] = ema_12 - ema_26
+```
+
+---
+
+## Примеры использования
+
+### Анализ одной криптовалюты
+```python
+analyzer = CryptoAnalyzer(currency="BTC", mode="crypto")
+await analyzer.load_data_async()
+analysis_result = analyzer.basic_analysis()
+```
+
+### Работа с большими данными
+```python
+analyzer = CryptoAnalyzer(mode="big_data")
+status, df = fetch_realtime_data("BTC", "big_data", CoinGeckoAPI())
+```
+
+---
+
+## Визуализация данных
+
+### Доступные графики
+```python
+def visualize_data(self, theme: str = 'dark') -> tuple[str, list[Path]]:
+    available_charts = []
+    if self.mode == "crypto":
+        available_charts.extend(['Японские свечи', 'MACD'])
+    if numeric_col:
+        available_charts.extend(['Гистограмма', 'Ящик с усами'])
+```
+
+### Пример создания свечного графика
+```python
+ohlcv = self.df[['open', 'high', 'low', 'close', 'volume']].tail(100)
+mpf.plot(ohlcv, type='candle', style='nightclouds', 
+         title=f'График {self.currency}')
+```
+
+---
+
+## FAQ и решение проблем
+
+### Ошибка лимита запросов
+```python
+except requests.exceptions.HTTPError as e:
+    if response.status_code == 429:
+        logger.warning("Превышен лимит запросов. Ожидание 60 секунд...")
+        time.sleep(60)
+        return self.fetch_market_data(per_page, page)
+```
+
+### Проблемы с данными
+1. **Пропущенные значения**:
+```python
+self.df = self.df.fillna(method='ffill')
+```
+
+2. **Выбросы**:
+```python
+Q1 = self.df[column].quantile(0.25)
+Q3 = self.df[column].quantile(0.75)
+IQR = Q3 - Q1
+self.df = self.df[(self.df[column] >= Q1 - 1.5*IQR) & (self.df[column] <= Q3 + 1.5*IQR)]
+```
+
+---
+
+## Полезные ссылки
+- [Официальная документация CoinGecko](https://www.coingecko.com/en/api)
+- [Документация yfinance](https://github.com/ranaroussi/yfinance)
+- [Примеры mplfinance](https://github.com/matplotlib/mplfinance)
+
+Для дополнительных вопросов создавайте issue в репозитории проекта!). Ключевые разделы:
 - [Начало работы](https://github.com/your-username/crypto-analyzer-pro/wiki/Getting-Started)
 - [Интеграция API](https://github.com/your-username/crypto-analyzer-pro/wiki/API-Integration)
 - [Руководство по визуализации](https://github.com/your-username/crypto-analyzer-pro/wiki/Visualization-Guide)
