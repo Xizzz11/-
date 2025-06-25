@@ -18,8 +18,35 @@ CryptoAnalyzer Pro — это мощное приложение на Python дл
 
 ## 📸 Скриншоты
 
-![Скриншот интерфейса](screenshots/main_gui.png)
-![Свечной график](screenshots/btc_candlestick.png)
+![image](https://github.com/user-attachments/assets/ca7df2d2-71dd-4a10-afcf-01c3e23f0dd8)
+
+![image](https://github.com/user-attachments/assets/c0cda0b1-3f07-40ba-bf19-fda56c7910f3)
+
+![image](https://github.com/user-attachments/assets/57beb404-ae33-4a8c-8f0b-6ff1d0531da1)
+
+![image](https://github.com/user-attachments/assets/ccb5c7bd-a56e-4280-bbb7-e87efd95ca18)
+
+![image](https://github.com/user-attachments/assets/17e40893-0258-4eaa-a5cd-b59d5bac85c7)
+
+![image](https://github.com/user-attachments/assets/1997a9fe-f267-4afe-8aa6-77851133c1ac)
+
+![image](https://github.com/user-attachments/assets/f80bd762-9091-44d1-96b5-078bc8061824)
+
+![image](https://github.com/user-attachments/assets/5413741f-2180-4634-b377-05b1f72ffc7c)
+
+![image](https://github.com/user-attachments/assets/622e1afd-3dcc-4431-80a5-1d01ba684d03)
+
+![image](https://github.com/user-attachments/assets/03d62ade-87e4-4799-bd2a-c5b1d909d651)
+
+![image](https://github.com/user-attachments/assets/a2fa5a68-a1f7-4ffa-b841-76bf633436e2)
+
+![image](https://github.com/user-attachments/assets/7f5f6b52-f57c-4d3e-a916-885c4127ef69)
+
+![image](https://github.com/user-attachments/assets/ea90d969-c1bd-4145-a71e-514d2868b09f)
+
+![image](https://github.com/user-attachments/assets/e9fe7683-9dd5-4563-9827-57d794cc262a)
+
+![image](https://github.com/user-attachments/assets/4b5c2e83-e440-4f00-9953-9484a9f878e7)
 
 ## 🚀 Начало работы
 
