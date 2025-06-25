@@ -95,5 +95,5 @@ CryptoAnalyzer Pro — это мощное приложение на Python дл
 
 ## 📝 Wiki
 
-Подробная документация доступна в [GitHub Wiki](# 📚 Wiki для CryptoAnalyzer Pro
+Подробная документация доступна в (# 📚 Wiki для CryptoAnalyzer Pro](https://github.com/Xizzz11/-/wiki)
 
